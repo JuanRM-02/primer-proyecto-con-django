@@ -6,12 +6,14 @@ from django.shortcuts import get_object_or_404
 from .models import Project, Task
 
 
-def hello(request):
-    return HttpResponse("<h1>Hola mundo</h1>")
+def index(request):
+    title = 'Welcome to Django'
+    return render(request, 'index.html', {'title': title})
 
 
 def about(request):
-    return HttpResponse("<h1>About</h1>")
+    username = "Juan"
+    return render(request, 'about.html', {'username': username})
 
 
 def user(request, username):
@@ -20,10 +22,10 @@ def user(request, username):
 
 
 def projects(request):
-    project = list(Project.objects.values())
-    return JsonResponse(project, safe=False)
+    # project = list(Project.objects.values())
+    return render(request, 'projects.html')
 
 
 def tasks(request, id):
-    task = get_object_or_404(Task, id=id)
-    return HttpResponse("task: %s" % task.title)
+    # task = get_object_or_404(Task, id=id)
+    return render(request, 'tasks.html')
