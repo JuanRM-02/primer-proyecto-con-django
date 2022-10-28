@@ -23,9 +23,11 @@ def user(request, username):
 
 def projects(request):
     # project = list(Project.objects.values())
-    return render(request, 'projects.html')
+    projects = Project.objects.all()
+    return render(request, 'projects.html', {'projects': projects})
 
 
-def tasks(request, id):
+def tasks(request):
     # task = get_object_or_404(Task, id=id)
-    return render(request, 'tasks.html')
+    tasks = Task.objects.all()
+    return render(request, 'tasks.html', {'tasks': tasks})
