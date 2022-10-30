@@ -2,28 +2,28 @@
 
 {% block content %}
 
-<h1>Tasks</h1>
+    <h1>Tasks</h1>
 
-{% for task in tasks %}
+    {% for task in tasks %}
 
-<div>
-    <h2>
-        {{task.title}}
-    </h2>
-    
-    {% if task.done == False %}
-    <div>Tarea pendiente</div>
-    {% else %}
-    <div>Tarea realizada</div>
-    {% endif %}
-    
-    <div>
-        {{task.project}}
-    </div>
-    <button>Delete</button>
-    <button>Done</button>
-</div>
+        <div>
+            <h2>
+                {{task.title}}
+            </h2>
+            
+            {% if task.done == False %}
+                <div>Tarea pendiente</div>
+            {% else %}
+                <div>Tarea realizada</div>
+            {% endif %}
+            
+            <div>
+                {{task.project}}
+            </div>
+            <button>Delete</button>
+            <button>Done</button>
+        </div>
 
-{% endfor %}
+    {% endfor %}
 
 {% endblock %}
