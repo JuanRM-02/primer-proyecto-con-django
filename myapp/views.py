@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 
 
@@ -22,12 +22,26 @@ def user(request, username):
     return HttpResponse("<h1>Hola %s</h1>" % username)
 
 
+def project(request, id):
+    project = get_object_or_404(Project, id=id)
+    tasks = Task.objects.filter(project_id = id)
+    return render(request, 'project.html', {'project': project, 'tasks': tasks})
+
+
 def projects(request):
     # project = list(Project.objects.values())
     projects = Project.objects.all()
     return render(request, 'projects.html', {'projects': projects})
 
 
+def create_project(request):
+    if request.method == 'GET':
+        return render(request, 'create_project.html', {'form': Create_new_project()})
+    else:
+        Project.objects.create(name=request.POST['name'])
+        return redirect('projects')
+                
+                
 def tasks(request):
     # task = get_object_or_404(Task, id=id)
     tasks = Task.objects.all()
@@ -42,10 +56,3 @@ def create_task(request):
         return redirect('tasks')
                 
 
-def create_project(request):
-    if request.method == 'GET':
-        return render(request, 'create_project.html', {'form': Create_new_project()})
-    else:
-        Project.objects.create(name=request.POST['name'])
-        return redirect('projects')
-                

@@ -5,8 +5,11 @@
     <h1>Projects</h1>
 
     {% for project in projects %}
-
-       <div>{{project}}</div>
+        <article class="card">
+            <a href="{% url 'project' project.id %}">
+                <div>{{project}}</div>
+            </a>
+        </article>
 
     {% endfor %}
 
